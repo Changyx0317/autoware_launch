@@ -85,6 +85,17 @@
     </include>
   </group>
 
+  <let
+    name="simulator_input_ackermann_control_command"
+    value="/control/trajectory_follower/control_cmd"
+    if="$(eval '&quot;$(var control_module_preset)&quot; in [&quot;dwa_tracking_minimal&quot;, &quot;pp_pid_direct_passthrough&quot;]')"
+  />
+  <let
+    name="simulator_input_ackermann_control_command"
+    value="/control/command/control_cmd"
+    unless="$(eval '&quot;$(var control_module_preset)&quot; in [&quot;dwa_tracking_minimal&quot;, &quot;pp_pid_direct_passthrough&quot;]')"
+  />
+
   <!-- Simulator -->
   <group>
     <let name="launch_dummy_perception" value="false" if="$(var scenario_simulation)"/>
@@ -108,6 +119,7 @@
       <arg name="initial_engage_state" value="$(var initial_engage_state)"/>
       <arg name="vehicle_info_param_file" value="$(find-pkg-share $(var vehicle_model)_description)/config/vehicle_info.param.yaml"/>
       <arg name="raw_vehicle_cmd_converter_param_path" value="$(find-pkg-share autoware_launch)/config/vehicle/raw_vehicle_cmd_converter/raw_vehicle_cmd_converter.param.yaml"/>
+      <arg name="input_ackermann_control_command" value="$(var simulator_input_ackermann_control_command)"/>
     </include>
   </group>
 </launch>

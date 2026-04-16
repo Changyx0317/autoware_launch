@@ -1,0 +1,8 @@
+launch:
+  - arg:
+      name: trajectory_follower_mode
+      default: dwa_trajectory_follower
+      # option: trajectory_follower_node
+      #         smart_mpc_trajectory_follower
+      #         dwa_trajectory_follower
+      #         none
