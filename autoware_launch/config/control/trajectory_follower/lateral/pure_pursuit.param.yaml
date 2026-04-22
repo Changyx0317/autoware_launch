@@ -1,7 +1,7 @@
 /**:
   ros__parameters:
-    ld_velocity_ratio: 2.4  # 前视距离中的速度项系数，速度越大前视距离越长
-    ld_lateral_error_ratio: 3.6  # 前视距离中的横向误差项系数，偏差越大前视距离越长
+    ld_velocity_ratio: 0.5  # 前视距离中的速度项系数，速度越大前视距离越长
+    ld_lateral_error_ratio: 0.5  # 前视距离中的横向误差项系数，偏差越大前视距离越长
     
     ld_curvature_ratio: 120.0  # 前视距离中的曲率项系数（负向作用），弯越急前视距离越短
     max_angular_velocity_rps: 1.0  # 横向控制输出角速度上限（rad/s，差速语义）
@@ -25,10 +25,10 @@
     goal_yaw_alignment_max_w_accel_rps2: 1.0  # 终点对齐角速度变化率上限（rad/s^2）
 
     long_ld_lateral_error_threshold: 0.5  # 触发“增大前视距离”的横向误差阈值（m）
-    min_lookahead_distance: 4.35  # 最小前视距离（m）
-    max_lookahead_distance: 15.0  # 最大前视距离（m）
+    min_lookahead_distance: 0.4  # 最小前视距离（m）
+    max_lookahead_distance: 5.0  # 最大前视距离（m）
     converged_steer_rad: 0.1  # 转向收敛判据阈值（rad）
-    reverse_min_lookahead_distance: 7.0  # 倒车时最小前视距离（m）
+    reverse_min_lookahead_distance: 0.5  # 倒车时最小前视距离（m）
     prediction_ds: 0.3  # 预测轨迹离散步长（m）
     prediction_distance_length: 21.0  # 预测轨迹总长度（m）
     resampling_ds: 0.1  # 输入轨迹重采样间隔（m）
