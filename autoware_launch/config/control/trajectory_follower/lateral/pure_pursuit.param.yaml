@@ -10,12 +10,12 @@
     in_place_rotation_stop_velocity_mps: 0.01  # 判定“完全停稳”的速度阈值（m/s）
     in_place_rotation_angular_velocity_rps: 0.3  # 原地转向时使用的固定角速度幅值（rad/s）
     in_place_rotation_curvature_threshold: 0.0001  # 原地转向触发的最小曲率阈值，抑制噪声抖动
-    enable_heading_alignment_gate: true  # 是否启用“起步前朝向对齐”门控
-    heading_alignment_threshold_rad: 0.01  # 起步前允许的目标方位角误差阈值（rad）
-    heading_alignment_exit_threshold_rad: 0.006  # 起步朝向门控解除阈值（rad，建议小于进入阈值形成滞回）
+    enable_heading_alignment_gate: false  # 关闭：起步对齐由trajectory_follower状态机负责
+    heading_alignment_threshold_rad: 0.06  # 起步前允许的目标方位角误差阈值（rad）
+    heading_alignment_exit_threshold_rad: 0.03  # 起步朝向门控解除阈值（rad，建议小于进入阈值形成滞回）
     heading_alignment_check_max_speed_mps: 0.20  # 仅在低于该速度时启用朝向门控（m/s）
     heading_alignment_min_target_distance_m: 0.30  # 目标点过近时跳过朝向门控（m）
-    enable_goal_yaw_alignment_after_stop: true  # 到达终点位置并停稳后，是否启用终点朝向对齐
+    enable_goal_yaw_alignment_after_stop: false  # 关闭：终点对齐由trajectory_follower状态机负责
     goal_yaw_alignment_position_tolerance_m: 0.30  # 进入终点朝向对齐的终点位置阈值（m）
     goal_yaw_alignment_position_hysteresis_m: 0.20  # 终点对齐阶段的位置滞回窗口（m）
     goal_yaw_alignment_yaw_tolerance_rad: 0.08  # 终点朝向对齐判据阈值（rad）
@@ -23,6 +23,7 @@
     goal_yaw_alignment_kp: 1.5  # 终点对齐角速度比例系数
     goal_yaw_alignment_min_w_rps: 0.03  # 终点对齐最小角速度（rad/s）
     goal_yaw_alignment_max_w_accel_rps2: 1.0  # 终点对齐角速度变化率上限（rad/s^2）
+    trajectory_timeout_sec: 0.0  # 轨迹超时保护（0为关闭）
 
     long_ld_lateral_error_threshold: 0.5  # 触发“增大前视距离”的横向误差阈值（m）
     min_lookahead_distance: 0.4  # 最小前视距离（m）
