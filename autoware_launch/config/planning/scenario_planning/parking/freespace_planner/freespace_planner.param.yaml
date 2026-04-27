@@ -1,58 +1,58 @@
 /**:
   ros__parameters:
     # -- Node Configurations --
-    planning_algorithm: "astar"
-    waypoints_velocity: 5.0
-    update_rate: 10.0
-    th_arrived_distance_m: 0.5
-    th_stopped_time_sec: 1.0
-    th_stopped_velocity_mps: 0.01
-    th_course_out_distance_m: 1.0
-    th_obstacle_time_sec: 1.0
-    vehicle_shape_margin_m: 0.4
-    replan_when_obstacle_found: true
-    replan_when_course_out: true
+    planning_algorithm: "astar"  
+    waypoints_velocity: 4.0  # 输出轨迹点的期望速度（m/s）
+    update_rate: 10.0  
+    th_arrived_distance_m: 0.1  # 判定到达目标点的距离阈值（m）
+    th_stopped_time_sec: 0.5  # 判定“已停稳”所需持续时间（s）
+    th_stopped_velocity_mps: 0.01  # 判定“已停稳”的速度阈值（m/s）
+    th_course_out_distance_m: 1.0  # 判定偏离当前轨迹的横向距离阈值（m）
+    th_obstacle_time_sec: 1.0  # 障碍物持续出现超过该时间后触发重规划（s）
+    vehicle_shape_margin_m: 0.4  # 车辆外形膨胀安全裕量（m）
+    replan_when_obstacle_found: true  # 检测到障碍物时是否重规划
+    replan_when_course_out: true  # 车辆偏离轨迹时是否重规划
 
     # -- Configurations common to the all planners --
     # base configs
-    time_limit: 30000.0
+    time_limit: 30000.0  # 单次规划的时间上限（ms）
     # robot configs # TODO replace by vehicle_info
-    max_turning_ratio: 0.5 # ratio of actual turning limit of vehicle
-    turning_steps: 1
+    max_turning_ratio: 0.5 # 车辆最大转向能力比例系数（相对车辆物理极限）
+    turning_steps: 1  # 离散转向步数（越大转向角离散越细）
     # search configs
-    theta_size: 200
-    angle_goal_range: 360.0
-    lateral_goal_range: 0.5
-    longitudinal_goal_range: 1.0
-    curve_weight: 0.5
-    reverse_weight: 2.0
-    direction_change_weight: 6.0
+    theta_size: 200  # 航向角离散数量（角度分辨率）
+    angle_goal_range: 360.0  # 目标航向容差范围（deg）
+    lateral_goal_range: 0.5  # 目标横向容差范围（m）
+    longitudinal_goal_range: 1.0  # 目标纵向容差范围（m）
+    curve_weight: 0.5  # 曲率代价权重（越大越抑制急转弯）
+    reverse_weight: 2.0  # 倒车代价权重（越大越不倾向倒车）
+    direction_change_weight: 6.0  # 前后换向代价权重（越大越减少换向）
     # costmap configs
-    obstacle_threshold: 100
+    obstacle_threshold: 100  # 栅格被视为障碍物的阈值
 
     # -- A* search Configurations --
     astar:
-      search_method: "forward"  # options: forward, backward
-      only_behind_solutions: false
-      use_back: true
-      adapt_expansion_distance: true
-      expansion_distance: 0.5
-      near_goal_distance: 3.0
-      distance_heuristic_weight: 2.0
-      smoothness_weight: 2.0
-      obstacle_distance_weight: 1.75
-      goal_lat_distance_weight: 0.0
-      motion_model: "diff_drive"  # options: bicycle, diff_drive
-      enable_direct_three_phase_maneuver: true
-      max_curvature: 0.5
-      allow_in_place_turn: false
-      in_place_turn_angle_rad: 0.261799388
-      in_place_turn_cost: 0.03
+      search_method: "forward"  # 搜索方向（forward 前向搜索 / backward 反向搜索）
+      only_behind_solutions: false  # 是否仅接受目标在车后方可达的解
+      use_back: true  # 是否允许倒车扩展
+      adapt_expansion_distance: true  # 是否根据场景自适应扩展步长
+      expansion_distance: 0.5  # 基础扩展步长（m）
+      near_goal_distance: 3.0  # 距离目标小于该值时使用近目标策略（m）
+      distance_heuristic_weight: 2.0  # 启发式距离代价权重
+      smoothness_weight: 2.0  # 平滑代价权重（越大越偏好平滑轨迹）
+      obstacle_distance_weight: 1.75  # 障碍物距离代价权重（越大越远离障碍）
+      goal_lat_distance_weight: 0.0  # 目标横向偏差代价权重
+      motion_model: "diff_drive"  # 运动学模型（bicycle / diff_drive）
+      enable_direct_three_phase_maneuver: true  # 启用直接三段式机动（原地转向-直行/倒车-终点对齐）
+      max_curvature: 0.5  # 最大曲率约束（1/m）
+      allow_in_place_turn: false  # 是否允许在 A* 扩展中加入原地转向节点
+      in_place_turn_angle_rad: 0.261799388  # 原地转向单步角度（rad）
+      in_place_turn_cost: 0.03  # 原地转向代价权重
 
     # -- RRT* search Configurations --
     rrtstar:
-      enable_update: true
-      use_informed_sampling: true
-      max_planning_time: 150.0
-      neighbor_radius: 8.0
-      margin: 0.1
+      enable_update: true  # 规划过程中是否持续更新树
+      use_informed_sampling: true  # 是否启用 informed sampling 加速收敛
+      max_planning_time: 150.0  # RRT* 最大规划时长（ms）
+      neighbor_radius: 8.0  # 邻域搜索半径（m）
+      margin: 0.1  # 与障碍物的最小安全边距（m）
