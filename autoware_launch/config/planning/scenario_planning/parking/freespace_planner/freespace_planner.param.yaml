@@ -22,8 +22,8 @@
     # search configs
     theta_size: 200  # 航向角离散数量（角度分辨率）
     angle_goal_range: 360.0  # 目标航向容差范围（deg）
-    lateral_goal_range: 0.5  # 目标横向容差范围（m）
-    longitudinal_goal_range: 1.0  # 目标纵向容差范围（m）
+    lateral_goal_range: 0.1  # 目标横向容差范围（m）
+    longitudinal_goal_range: 0.1  # 目标纵向容差范围（m）
     curve_weight: 0.5  # 曲率代价权重（越大越抑制急转弯）
     reverse_weight: 2.0  # 倒车代价权重（越大越不倾向倒车）
     direction_change_weight: 6.0  # 前后换向代价权重（越大越减少换向）
